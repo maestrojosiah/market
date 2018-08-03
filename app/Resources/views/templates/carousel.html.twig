@@ -1,0 +1,132 @@
+  <!--Carousel Wrapper-->
+  <div id="carousel-example-1z" class="carousel slide carousel-fade pt-4" data-ride="carousel">
+
+    <!--Indicators-->
+    <ol class="carousel-indicators">
+      <li data-target="#carousel-example-1z" data-slide-to="0" class="active"></li>
+      <li data-target="#carousel-example-1z" data-slide-to="1"></li>
+      <li data-target="#carousel-example-1z" data-slide-to="2"></li>
+    </ol>
+    <!--/.Indicators-->
+
+    <!--Slides-->
+    <div class="carousel-inner" role="listbox">
+
+      <!--First slide-->
+      <div class="carousel-item active">
+        <div class="view" style="background-image: url('{{asset('img/foods-min.jpg')}}'); background-repeat: no-repeat; background-size: cover;">
+
+          <!-- Mask & flexbox options-->
+          <div class="mask rgba-black-strong d-flex justify-content-center align-items-center">
+
+            <!-- Content -->
+            <div class="text-center white-text mx-5 wow fadeIn">
+              <h1 class="mb-4">
+                <strong>A Healthy Home!</strong>
+              </h1>
+
+              <p>
+                <strong>Best Health Books For Your Library</strong>
+              </p>
+
+              <p class="mb-4 d-none d-md-block">
+                <strong>Take care of your health now for a painless tomorrow. Invest in your health.</strong>
+              </p>
+
+              <a target="_blank" href="{{path('book_category', {'category': 'health'})}}" class="btn btn-outline-white btn-lg">Health Books
+                <i class="fa fa-book ml-2"></i>
+              </a>
+            </div>
+            <!-- Content -->
+
+          </div>
+          <!-- Mask & flexbox options-->
+
+        </div>
+      </div>
+      <!--/First slide-->
+
+      <!--Second slide-->
+      <div class="carousel-item">
+        <div class="view" style="background-image: url('{{asset('img/books_shelf-min.jpg')}}'); background-repeat: no-repeat; background-size: cover;">
+
+          <!-- Mask & flexbox options-->
+          <div class="mask rgba-black-strong d-flex justify-content-center align-items-center">
+
+            <!-- Content -->
+            <div class="text-center white-text mx-5 wow fadeIn">
+              <h1 class="mb-4">
+                <strong>Great Variety!</strong>
+              </h1>
+
+              <p>
+                <strong>Children, Marriage, Counselling, Health...</strong>
+              </p>
+
+              <p class="mb-4 d-none d-md-block">
+                <strong>Find a great variety of books for your family, school or any institution..</strong>
+              </p>
+
+              <a target="_blank" href="{{path('book_index')}}" class="btn btn-outline-white btn-lg">See All Books
+                <i class="fa fa-book ml-2"></i>
+              </a>
+            </div>
+            <!-- Content -->
+
+          </div>
+          <!-- Mask & flexbox options-->
+
+        </div>
+      </div>
+      <!--/Second slide-->
+
+      <!--Third slide-->
+      <div class="carousel-item">
+        <div class="view" style="background-image: url('{{asset('img/bike-min.jpg')}}'); background-repeat: no-repeat; background-size: cover;">
+
+          <!-- Mask & flexbox options-->
+          <div class="mask rgba-black-strong d-flex justify-content-center align-items-center">
+
+            <!-- Content -->
+            <div class="text-center white-text mx-5 wow fadeIn">
+              <h1 class="mb-4">
+                <strong>Save Time & Money</strong>
+              </h1>
+
+              <p>
+                <strong>Free Delivery To Your Office/Home</strong>
+              </p>
+
+              <p class="mb-4 d-none d-md-block">
+                <strong>Purchase a book and we deliver it. Pay on delivery. Satisfaction guaranteed.</strong>
+              </p>
+
+              <a target="_blank" href="{{path('book_index')}}" class="btn btn-outline-white btn-lg">Start Shopping Now
+                <i class="fa fa-money ml-2"></i>
+              </a>
+            </div>
+            <!-- Content -->
+
+          </div>
+          <!-- Mask & flexbox options-->
+
+        </div>
+      </div>
+      <!--/Third slide-->
+
+    </div>
+    <!--/.Slides-->
+
+    <!--Controls-->
+    <a class="carousel-control-prev" href="#carousel-example-1z" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carousel-example-1z" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+    <!--/.Controls-->
+
+  </div>
+  <!--/.Carousel Wrapper-->

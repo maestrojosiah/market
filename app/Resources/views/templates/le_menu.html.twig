@@ -1,0 +1,8 @@
+{% if app.user and app.user.active == 1 %}
+<div class="btn-group" role="group" aria-label="Basic example">
+  <a href="{{path('book_new')}}" class="btn btn-secondary btn-xs" style="padding:1px 5px; font-size:12px; line-height:1.5; white-space:nowrap;">Add Book</a>
+  <a href="{{path('book_index')}}" class="btn btn-secondary btn-xs" style="padding:1px 5px; font-size:12px; line-height:1.5; white-space:nowrap;">Manage Books & Presentations</a>
+  <a href="{{path('orda_index')}}" class="btn btn-secondary btn-xs" style="padding:1px 5px; font-size:12px; line-height:1.5; white-space:nowrap;">Orders</a>
+  {% if app.user.admin == 1 %}<a href="{{path('registration_list')}}" class="btn btn-secondary btn-xs" style="padding:1px 5px; font-size:12px; line-height:1.5; white-space:nowrap;">Users</a>{% endif %}
+</div>
+{% endif %}
