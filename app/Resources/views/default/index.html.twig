@@ -6,7 +6,7 @@
     <div class="container">
 
       <!--Navbar-->
-      <nav class="navbar navbar-expand-lg navbar-dark mdb-color lighten-3 mt-3 mb-5">
+      <nav class="navbar navbar-expand-lg navbar-dark mdb-color lighten-3 mt-3 mb-5"  style="position: relative;">
 
         <!-- Navbar brand -->
         <span class="navbar-brand">Categories:</span>
@@ -35,13 +35,18 @@
           </ul>
           <!-- Links -->
 
-          <form class="form-inline">
-            <div class="md-form my-0">
-              <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-            </div>
-          </form>
+            <form class="form-inline" role="search">
+                <div class="md-form my-0">
+                    <input id="search_input" class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+                </div>
+            </form>
         </div>
         <!-- Collapsible content -->
+        <div class="panel panel-default" id="searchResults" style="position: absolute; right: 20px; top: 70px; width:50%;">
+            <span id='close' style="display:none; cursor: pointer;"><i class="fa fa-times"></i></span>
+            <div id="listGroup" class="list-group"> </div>
+        </div>
+
 
       </nav>
       <!--/.Navbar-->
@@ -145,4 +150,60 @@
   </main>
   <!--Main layout-->
 
+{% endblock %}
+{% block javascripts %}
+  <script>
+    $( "#search_input" ).keyup(function( event ) {
+      var search_text = $(this).val();
+      $("#listGroup").text("Loading...");
+      $.ajax({
+          url:'{{ (path('search_books')) }}',
+          type: "POST",
+          dataType: "json",
+          data: {
+            "search_text": search_text,
+          },
+          async: true,
+          success: function (data)
+          {
+            $( "#listGroup" ).empty();
+            if (search_text == ""){
+              $( "#listGroup" ).empty();
+            } else {
+              $.each(data, function( index, value ) {
+
+              $("#listGroup").append(
+              '<div class="list-group-item list-group-item-action" style="z-index:1000;">' +
+              '<div class="card">' +
+
+                '<div class="card-body text-center">' +
+                  '<a href="' + value[4] + '" class="grey-text">' +
+                    '<h5>'+ value[0]+'</h5>' +
+                  '</a>' +
+                  '<p>' +
+                    '<strong>' +
+                      '<a href="' + value[4] + '" class="dark-grey-text">'+ value[1] +
+                        ' <span class="badge badge-pill danger-color">'+ value[2]+'</span>' +
+                      '</a>' +
+                    '</strong>' +
+                  '</p>' +
+
+                  '<p class="blue-text">' +
+                    '<em>'+ value[3]+'</em>' +
+                  '</p>' +
+
+                '</div>' +
+              '</div>' +
+              '</div>');
+
+              });  
+            }         
+          },
+          error: function (xhr, status, error) {
+            console.log('error');
+          }
+      });
+
+    });
+  </script>
 {% endblock %}

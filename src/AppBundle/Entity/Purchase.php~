@@ -35,6 +35,12 @@ class Purchase
     private $prospect;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Orda", inversedBy="purchases")
+     * @ORM\JoinColumn(name="order_id", referencedColumnName="id", onDelete="CASCADE")
+     */
+    private $order;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Book", inversedBy="purchases")
      * @ORM\JoinColumn(name="book_id", referencedColumnName="id", onDelete="CASCADE")
      */
@@ -185,5 +191,29 @@ class Purchase
     public function getCost()
     {
         return $this->cost;
+    }
+
+    /**
+     * Set order
+     *
+     * @param \AppBundle\Entity\Orda $order
+     *
+     * @return Purchase
+     */
+    public function setOrder(\AppBundle\Entity\Orda $order = null)
+    {
+        $this->order = $order;
+
+        return $this;
+    }
+
+    /**
+     * Get order
+     *
+     * @return \AppBundle\Entity\Orda
+     */
+    public function getOrder()
+    {
+        return $this->order;
     }
 }

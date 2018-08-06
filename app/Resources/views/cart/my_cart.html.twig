@@ -91,16 +91,23 @@
         {% if books|length > 0 %}
           <ul class="list-group mb-3 z-depth-1">
           	  {% set total_cost = 0 %}
-              {% for book in books %}
-              	{% set total_cost = total_cost + (book.cost * quantities[book.id]) %}
-	            <li class="list-group-item d-flex justify-content-between lh-condensed">
-	              <div>
-	                <h6 class="my-0">{{book.title|title}}[{{quantities[book.id]}}]</h6>
-	                <small class="text-muted">{{ book.description|length > 20 ? book.description|striptags|slice(0, 20) ~ '...' : book.description|raw|striptags  }}</small>
-	              </div>
-	              <span class="text-muted">Ksh {{book.cost * quantities[book.id]|number_format}}</span>
-	            </li>
-	          {% endfor %}
+              <table class="table">
+                <tr>
+                  <th>Product</th>
+                  <th>Qty</th>
+                  <th>@</th>
+                  <th>Total</th>
+                </tr>
+                {% for book in books %}
+                <tr>
+                  {% set total_cost = total_cost + (book.cost * quantities[book.id]) %}
+                  <td>{{book.title|title}}</td>
+                  <td>{{quantities[book.id]}}</td>
+                  <td>{{book.cost|number_format}}</td>
+                  <td>Ksh {{book.cost * quantities[book.id]|number_format}}</td>
+                </tr>
+                {% endfor %}
+              </table>
             <li class="list-group-item d-flex justify-content-between">
               <span>Total (Ksh)</span>
               <strong>Ksh {{total_cost|number_format}}</strong>

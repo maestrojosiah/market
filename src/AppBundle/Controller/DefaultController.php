@@ -51,22 +51,45 @@ class DefaultController extends Controller
      */
     public function listAgentsAction(Request $request)
     {
-        $residence = $request->request->get('book_id');
+        $residence = $request->request->get('residence');
     
         $agents = $this->em()->getRepository('AppBundle:User')
             ->searchMatchingResidents($residence);
 
         $agents_list = [];
         foreach ($agents as $key => $agent) {
-            $agents_list = [
+            $agents_list[] = [
                 $agent->getFName()." ".$agent->getLName(), 
                 $agent->getPhone(), 
                 $agent->getEmail(), 
-                $agent->getUsername()."hheskenya.org",
+                $agent->getUsername().".hheskenya.org",
                 $agent->getResidence() 
              ];
         }
         return new JsonResponse($agents_list);
+    }
+
+    /**
+     * @Route("/hhes/books/list", name="search_books")
+     */
+    public function searchBooksAction(Request $request)
+    {
+        $result_text = $request->request->get('search_text');
+    
+        $books = $this->em()->getRepository('AppBundle:Book')
+            ->searchMatchingBooks($result_text);
+
+        $result_text = [];
+        foreach ($books as $key => $book) {
+            $result_text[] = [
+                $book->getTitle(), 
+                $book->getAuthor(), 
+                $book->getCategory(), 
+                substr($book->getDescription(), 0, 100)."...",
+                $this->generateUrl("book_show", ['id' => $book->getId()])
+             ];
+        }
+        return new JsonResponse($result_text);
     }
 
     /**

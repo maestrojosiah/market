@@ -10,4 +10,25 @@ namespace AppBundle\Repository;
  */
 class BookRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function searchMatchingBooks($searchText)
+    {
+        return $this->createQueryBuilder('b')
+           ->where('b.title LIKE :input OR b.description LIKE :input OR b.author LIKE :input OR b.category LIKE :input')               
+           ->setParameter('input', '%' .$searchText.'%')
+           ->setMaxResults(10)
+           ->orderBy('b.title', 'ASC')
+           ->getQuery()
+           ->getResult();
+    }
+
+    public function findGroupedBooks()
+    {
+        return $this->createQueryBuilder('b')
+           ->where('b.deleted = :input')
+           ->setParameter('input', '0')
+           ->orderBy('b.title', 'ASC')
+           ->getQuery()
+           ->getResult();
+    }
+
 }

@@ -30,6 +30,7 @@ class UserRepository extends \Doctrine\ORM\EntityRepository implements UserLoade
                ->where('u.residence LIKE :input')
                ->setParameter('input', '%' .$searchText.'%')
                ->setMaxResults(100)
+               ->orderBy('u.fName', 'ASC')
                ->getQuery()
                ->getResult();
     }	

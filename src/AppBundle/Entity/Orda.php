@@ -22,17 +22,15 @@ class Orda
     private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="order_number", type="string", length=255)
-     */
-    private $orderNumber;
-
-    /**
      * @ORM\ManyToOne(targetEntity="Prospect", inversedBy="orders")
      * @ORM\JoinColumn(name="prospect_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $prospect;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Purchase", mappedBy="order")
+     */
+    private $purchases;
 
 
     /**
@@ -45,29 +43,6 @@ class Orda
         return $this->id;
     }
 
-    /**
-     * Set orderNumber
-     *
-     * @param string $orderNumber
-     *
-     * @return Orda
-     */
-    public function setOrderNumber($orderNumber)
-    {
-        $this->orderNumber = $orderNumber;
-
-        return $this;
-    }
-
-    /**
-     * Get orderNumber
-     *
-     * @return string
-     */
-    public function getOrderNumber()
-    {
-        return $this->orderNumber;
-    }
     /**
      * Constructor
      */
@@ -98,5 +73,39 @@ class Orda
     public function getProspect()
     {
         return $this->prospect;
+    }
+
+    /**
+     * Add purchase
+     *
+     * @param \AppBundle\Entity\Purchase $purchase
+     *
+     * @return Orda
+     */
+    public function addPurchase(\AppBundle\Entity\Purchase $purchase)
+    {
+        $this->purchases[] = $purchase;
+
+        return $this;
+    }
+
+    /**
+     * Remove purchase
+     *
+     * @param \AppBundle\Entity\Purchase $purchase
+     */
+    public function removePurchase(\AppBundle\Entity\Purchase $purchase)
+    {
+        $this->purchases->removeElement($purchase);
+    }
+
+    /**
+     * Get purchases
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPurchases()
+    {
+        return $this->purchases;
     }
 }

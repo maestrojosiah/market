@@ -18,7 +18,7 @@
               <label for="agents_residents">Our Agents</label>
               <select class="form-control" id="agents_residents">
                 {% for agent in agents %}
-                  <option value="{{agent.id}}">{{agent.residence}}</option>
+                  <option value="{{agent.residence}}">{{agent.residence}}</option>
                 {% endfor %}
               </select>
             </div>
@@ -33,42 +33,6 @@
           <!--Content-->
           <div class="p-4">
             <span id="agents_list"></span>
-
-            <!--Card-->
-            <div class="card">
-
-              <!--Card image-->
-              <div class="view overlay">
-                <a href="#">
-                  <div class="mask rgba-white-slight"></div>
-                </a>
-              </div>
-              <!--Card image-->
-              
-              <!--Card content-->
-              <div class="card-body text-center">
-                <!--Category & Title-->
-                <a href="" class="grey-text">
-                  <h5>Title</h5>
-                </a>
-                <h5>
-                  <strong>
-                    <a href="" class="dark-grey-text">DSa
-                      <span class="badge badge-pill danger-color">ABc</span>
-                    </a>
-                  </strong>
-                </h5>
-
-                <h4 class="font-weight-bold blue-text">
-                  <strong>KSD Kes</strong>
-                </h4>
-
-              </div>
-              <!--Card content-->
-
-            </div>
-            <!--Card-->
-
           </div>
           <!--Content-->
 
@@ -90,20 +54,50 @@
 {% block javascripts %}
   <script>
     $(document).on('change', '#agents_residents', function(){
-
+      var residence = $("#agents_residents").val();
+      $("#agents_list").text("Loading...");
       $.ajax({
-          url:'{{ (path('add_to_cart')) }}',
+          url:'{{ (path('list_agent')) }}',
           type: "POST",
           dataType: "json",
           data: {
-            "book_id": book_id,
-            "user_id": user_id,
-            "order_qty": order_qty,
+            "residence": residence,
           },
           async: true,
           success: function (data)
           {
-            console.log(data);
+            $("#agents_list").text("");
+            $.each(data, function( index, value ) {
+
+            $("#agents_list").append(
+            '<div class="card">' +
+
+              '<div class="view overlay">' + 
+                '<a href="#">' +
+                  '<div class="mask rgba-white-slight"></div>' +
+                '</a>' +
+              '</div>' +
+
+              '<div class="card-body text-center">' +
+                '<a href="" class="grey-text">' +
+                  '<h5>'+ value[0]+'</h5>' +
+                '</a>' +
+                '<h5>' +
+                  '<strong>' +
+                    '<a href="" class="dark-grey-text">'+ value[4] +
+                      ' <span class="badge badge-pill danger-color">'+ value[1]+'</span>' +
+                    '</a>' +
+                  '</strong>' +
+                '</h5>' +
+
+                '<h4 class="font-weight-bold blue-text">' +
+                  '<a href="http://'+ value[3]+'"><strong>'+ value[3]+'</strong></a>' +
+                '</h4>' +
+
+              '</div>' +
+            '</div>');
+
+            });            
           },
           error: function (xhr, status, error) {
             console.log('error');

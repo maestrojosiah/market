@@ -16,7 +16,6 @@
     <table class="table table-striped" id="dt_tbl">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Ordernumber</th>
                 <th>Prospect</th>
                 <th>Prospect Phone</th>
@@ -29,12 +28,11 @@
         {% for orda in ordas %}
             {% if orda.prospect.user == app.user %}
             <tr>
-                <td><a href="{{ path('orda_show', { 'id': orda.id }) }}">{{ orda.id }}</a></td>
-                <td>{{ orda.orderNumber }}</td>
+                <td>{{ orda.id }}</td>
                 <td>{{ orda.prospect.name }}</td>
                 <td>{{ orda.prospect.phone }}</td>
                 <td>{{ orda.prospect.email }}</td>
-                <td><a href="{{path('orda_show',{'id': orda.id})}}">{{ orda.prospect.purchases|length }}</a></td>
+                <td><a href="{{path('orda_show',{'id': orda.id})}}">{{ orda.purchases|length }}</a></td>
                 <td>
                     <ul>
                         <li>

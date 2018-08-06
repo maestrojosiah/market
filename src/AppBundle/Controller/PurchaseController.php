@@ -129,6 +129,9 @@ class PurchaseController extends Controller
         $prospect->setUser($agent);
         $this->save($prospect);
 
+        $order = new Orda();
+        $order->setProspect($prospect);
+        $this->save($order);
 
         list($cookies, $count_cookies) = $this->readCookieAction($request);
         $books = [];
@@ -147,14 +150,11 @@ class PurchaseController extends Controller
             $purchase->setQuantity($quantity);
             $purchase->setCost($cost);
             $purchase->setProspect($prospect);
+            $purchase->setOrder($order);
             $this->save($purchase);
         }
 
-        $order = new Orda();
-        $order_number = "08HHES".$prospect->getId().$purchase->getId();
-        $order->setOrderNumber($order_number);
-        $order->setProspect($prospect);
-        $this->save($order);
+        $order_number = $order->getId();
 
         $from = $agent->getEmail();
         $to = $prospect->getEmail();

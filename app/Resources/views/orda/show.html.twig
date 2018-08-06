@@ -5,7 +5,7 @@
   <main class="mt-5 pt-4">
     <div class="container dark-grey-text mt-5">
 
-    <h4>Order {{orda.orderNumber}}</h4>
+    <h4>Order {{orda.id}}</h4>
     <!--Grid row-->
       <div class="row wow fadeIn">
         <!--Grid column-->
@@ -21,13 +21,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for purchase in orda.prospect.purchases %}
+                    {% for purchase in orda.purchases %}
+                        {% if purchase.prospect == orda.prospect %}
                         <tr>
                             <th>{{purchase.purchasedOn|date("d/m/Y")}}</th>
                             <td>{{ purchase.book.title }}</td>
                             <td>{{ purchase.quantity }}</td>
                             <td>{{ purchase.cost }}</td>
                         </tr>
+                        {% endif %}
                     {% endfor %}
                 </tbody>
             </table>

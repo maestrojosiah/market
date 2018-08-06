@@ -3,10 +3,10 @@
 
     <!--Call to action-->
     <div class="pt-4">
-      <a class="btn btn-outline-white" href="#" target="_blank" role="button">Download Catalog
+      <a class="btn btn-outline-white" href="{{path('download_word_catalog',{'name': "now"|date("Y") ~ 'Catalog' })}}" role="button">Download Catalog
         <i class="fa fa-download ml-2"></i>
       </a>
-      <a class="btn btn-outline-white" href="#" target="_blank" role="button">Contact an Agent
+      <a class="btn btn-outline-white" href="{{path('find_agent')}}" role="button">Contact an Agent
         <i class="fa fa-graduation-cap ml-2"></i>
       </a>
     </div>
